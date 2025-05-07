@@ -1,31 +1,30 @@
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.routes import auth, api_keys, openai_proxy
+from app.routes import auth, api_keys, llm_proxy
 
 app = FastAPI(
-    title="Student OpenAI API Proxy",
-    description="A serverless API that provides temporary access to OpenAI API for students",
+    title="Student LLM API Proxy",
+    description="A serverless API that provides temporary access to multiple LLM providers for students",
     version="1.0.0"
 )
 
-# Configure CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Restrict in production
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Include routers
 app.include_router(auth.router)
 app.include_router(api_keys.router)
-app.include_router(openai_proxy.router)
+app.include_router(llm_proxy.router)
 
 @app.get("/")
 async def root():
     return {
-        "message": "Welcome to the Student OpenAI API Proxy",
+        "message": "Welcome to the Student LLM API Proxy",
         "docs": "/docs",
         "version": "1.0.0"
     }
