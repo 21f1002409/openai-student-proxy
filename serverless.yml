@@ -1,4 +1,5 @@
-service: openai-student-proxy
+
+service: openai-student-llm-proxy
 
 frameworkVersion: '3'
 
@@ -9,6 +10,10 @@ provider:
   environment:
     SECRET_KEY: ${env:SECRET_KEY, 'dev-secret-key'}
     OPENAI_API_KEY: ${env:OPENAI_API_KEY}
+    ANTHROPIC_API_KEY: ${env:ANTHROPIC_API_KEY}
+    GOOGLE_API_KEY: ${env:GOOGLE_API_KEY}
+    MISTRAL_API_KEY: ${env:MISTRAL_API_KEY}
+    AWS_BEDROCK_ACCESS_KEY: ${env:AWS_BEDROCK_ACCESS_KEY}
 
 functions:
   api:
