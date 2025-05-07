@@ -1,3 +1,4 @@
+
 from pydantic import BaseModel, EmailStr, Field
 from typing import Optional, List, Dict, Any
 from datetime import datetime
@@ -43,7 +44,8 @@ class ApiKeyResponse(BaseModel):
     created_at: datetime
     max_usage: Optional[int]
 
-class OpenAIRequest(BaseModel):
+class LLMRequest(BaseModel):
+    provider: str = "openai"
     model: str
     messages: List[Dict[str, Any]]
     temperature: Optional[float] = 0.7
@@ -51,3 +53,5 @@ class OpenAIRequest(BaseModel):
     top_p: Optional[float] = 1.0
     frequency_penalty: Optional[float] = 0.0
     presence_penalty: Optional[float] = 0.0
+    stop: Optional[List[str]] = None
+    stream: Optional[bool] = False
